@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useEffect, useState } from "react";
+import GetSanityUrl from "./utils/GetSanityUrl.js";
+import SinglePost from "./components/SinglePost.js";
+import AllPosts from "./components/AllPosts.js";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Nav from "./components/Nav.js";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Nav />
+      <Routes>
+        <Route path="/" element={<AllPosts />} />
+        <Route path=":slug" element={<SinglePost />} />
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
