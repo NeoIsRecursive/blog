@@ -4,6 +4,7 @@ import GetSanityUrl from "../utils/GetSanityUrl.js";
 import { PortableText } from "@portabletext/react";
 import urlBuilder from "@sanity/image-url";
 import client from "../utils/client.js";
+import Loading from "./Loading.js";
 
 const SinglePost = ({ slug }) => {
   if (!slug) slug = window.location.pathname.substring(1);
@@ -21,11 +22,20 @@ const SinglePost = ({ slug }) => {
         setLoading(!loading);
       });
   }, []);
-  if (loading) return <p>{"loading"}</p>;
+  if (loading) return <Loading />;
   if (!loading && !post) return "Not found";
   return (
-    <div>
-      <p>{post.title}</p>
+    <div className="prose">
+      {post.mainImage && <img
+        alt=""
+        src={urlBuilder(client)
+          .image(post.mainImage)
+          .width(800)
+          .fit("max")
+          .auto("format")
+          .url()}
+      />}
+      <h1>{post.title}</h1>
       <PortableText
         value={post.body}
         components={{
