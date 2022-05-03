@@ -5,7 +5,7 @@ import { PortableText } from "@portabletext/react";
 import urlBuilder from "@sanity/image-url";
 import client from "../utils/client.js";
 
-export default ({ slug }) => {
+const SinglePost = ({ slug }) => {
   if (!slug) slug = window.location.pathname.substring(1);
 
   const [post, setPost] = useState(false);
@@ -32,6 +32,7 @@ export default ({ slug }) => {
           types: {
             image: ({ value }) => (
               <img
+                alt=""
                 src={urlBuilder(client)
                   .image(value)
                   .width(800)
@@ -46,3 +47,5 @@ export default ({ slug }) => {
     </div>
   );
 };
+
+export default SinglePost;

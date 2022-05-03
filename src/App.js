@@ -10,10 +10,12 @@ const App = () => {
   return (
     <BrowserRouter>
       <Nav />
-      <Routes>
-        <Route path="/" element={<AllPosts />} />
-        <Route path=":slug" element={<SinglePost />} />
-      </Routes>
+        <div className="p-4">
+          <Routes>
+              <Route path="/" element={<AllPosts />} />
+              <Route path=":slug" element={<SinglePost />} />
+          </Routes>
+        </div>
     </BrowserRouter>
   );
 };
