@@ -25,16 +25,19 @@ const SinglePost = ({ slug }) => {
   if (loading) return <Loading />;
   if (!loading && !post) return "Not found";
   return (
-    <div className="prose">
-      {post.mainImage && <img
-        alt=""
-        src={urlBuilder(client)
-          .image(post.mainImage)
-          .width(800)
-          .fit("max")
-          .auto("format")
-          .url()}
-      />}
+    <div className="prose mx-auto">
+      {post.mainImage && (
+        <img
+          alt=""
+          className="max-w-full max-h-[90vh]"
+          src={urlBuilder(client)
+            .image(post.mainImage)
+            .width(800)
+            .fit("max")
+            .auto("format")
+            .url()}
+        />
+      )}
       <h1>{post.title}</h1>
       <PortableText
         value={post.body}

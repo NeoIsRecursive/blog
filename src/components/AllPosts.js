@@ -13,27 +13,36 @@ const AllPosts = () => {
   }, []);
   return (
     <div>
-      <h2 className="text-2xl">Projects:</h2>
-      <div className="grid grid-cols-4 gap-4 auto-rows-min">
-        {posts.length > 0 ? posts.map((post, index) => {
-          return (
-            <div key={index} className="p-4 rounded-md drop-shadow-md bg-white text-center aspect-square">
-              <Link to={"/" + post.slug.current}>
-                {post.mainImage && <img
-                className="aspect-square object-cover h-full"
-                alt=""
-                src={urlBuilder(client)
-                  .image(post.mainImage)
-                  .width(800)
-                  .fit("max")
-                  .auto("format")
-                  .url()}
-              />}
-                <p className="text-lg font-bold text-sky-300">{post.title}</p>
-              </Link>
-            </div>
-          );
-        }): <Loading />}
+      <h2 className="text-2xl font-bold mb-4">Projects:</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-min">
+        {posts.length > 0 ? (
+          posts.map((post, index) => {
+            return (
+              <div
+                key={index}
+                className="p-4 rounded-md drop-shadow bg-white text-center aspect-square hover:drop-shadow-lg hover:scale-105 transition-all"
+              >
+                <Link to={"/" + post.slug.current}>
+                  {post.mainImage && (
+                    <img
+                      className="aspect-square object-cover h-full"
+                      alt=""
+                      src={urlBuilder(client)
+                        .image(post.mainImage)
+                        .width(800)
+                        .fit("max")
+                        .auto("format")
+                        .url()}
+                    />
+                  )}
+                  <p className="text-lg font-bold text-sky-300">{post.title}</p>
+                </Link>
+              </div>
+            );
+          })
+        ) : (
+          <Loading />
+        )}
       </div>
     </div>
   );
